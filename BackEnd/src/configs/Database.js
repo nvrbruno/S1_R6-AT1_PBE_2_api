@@ -85,17 +85,6 @@ export async function initializeDatabase() {
 
 
         await tempConnection.query(`
-            CREATE TABLE IF NOT EXISTS telefones (
-    IdTelefone INT PRIMARY KEY AUTO_INCREMENT,
-    IdCliente INT NOT NULL,
-    Telefone CHAR(11) NOT NULL,
-    FOREIGN KEY (IdCliente) REFERENCES clientes(IdCliente)
-);
-        `);
-
-
-
-        await tempConnection.query(`
             CREATE TABLE IF NOT EXISTS categorias(
 	id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL,
