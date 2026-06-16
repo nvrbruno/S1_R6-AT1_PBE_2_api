@@ -3,7 +3,9 @@ import express from 'express';
 import cors from 'cors';
 import routes from './routes/routes.js';
 import path from 'path';                          
-import { fileURLToPath } from 'url';              
+import { fileURLToPath } from 'url';  
+import { initializeDatabase } from './configs/Database.js';
+    
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);        
@@ -17,6 +19,10 @@ app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 app.use('/', routes);
 
-app.listen(process.env.PORT || process.env.SERVER_PORT, () => {
-    console.log(`Servidor rodando em: http://localhost:${process.env.PORT || process.env.SERVER_PORT}`);
+initializeDatabase().then(() => {
+    app.listen(process.env.SERVER_PORT, () => {
+        console.log(`Servidor rodando na porta ${process.env.SERVER_PORT}`);
+    });
+}).catch(err => {
+    console.error("Erro ao inicializar o banco de dados:", err);
 });
