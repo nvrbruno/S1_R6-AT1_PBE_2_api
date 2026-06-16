@@ -17,6 +17,6 @@ app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 app.use('/', routes);
 
-app.listen(process.env.SERVER_PORT, ()=> {
-    console.log(`Servidor rodando em: http://localhost:${process.env.SERVER_PORT}`);
+app.listen(process.env.PORT || process.env.SERVER_PORT, () => {
+    console.log(`Servidor rodando em: http://localhost:${process.env.PORT || process.env.SERVER_PORT}`);
 });
